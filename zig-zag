@@ -1,0 +1,73 @@
+
+ string convert(string s, int numRows) {
+        queue<char> q;
+        string ss="";
+        int n=numRows;
+        
+        if(numRows==1)
+        {
+            return s;
+        }
+        
+        for(int i=0;i<s.length();i++)
+        {
+            q.push(s[i]);
+        }
+        
+        //vector<vector<char>> res;
+        char res[n][s.length()];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<s.length();j++)
+            {
+                res[i][j]='-';
+            }
+        }
+        
+         int row=0;
+         int col=0;
+        
+        while(!q.empty())
+        {
+            
+            while(row<numRows)
+            {
+                if(q.empty())
+                {
+                    break;
+                }
+                res[row][col]= q.front();
+                //cout<<row<<"-"<<col<<"--->"<<res[row][col]<<"\n";
+                q.pop();
+                row++;
+            }   
+            row--;
+            while(row>0)
+            {
+                if(q.empty())
+                {
+                    break;
+                }
+                row--;
+                col++;
+                res[row][col]= q.front();
+                //cout<<row<<"-"<<col<<"--->"<<res[row][col]<<"**"<<"\n";
+                q.pop();  
+            }
+            row++;
+                        
+        }
+        for(int i=0;i<numRows;i++)
+        {
+            for(int j=0;j<s.length();j++)
+            {
+                if(res[i][j]!='-')
+                    
+                {
+                  ss=ss+res[i][j];
+                }
+            }
+        }
+        
+        return ss;
+    }
