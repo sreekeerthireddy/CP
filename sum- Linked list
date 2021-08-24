@@ -1,0 +1,66 @@
+
+ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+    {
+        queue<int> v1;
+        queue<int> v2;
+        queue<int> res;
+        ListNode* temp;
+        
+        ListNode* result= new ListNode();
+        temp=l1;
+        while(temp!=NULL)
+        {
+            v1.push(temp->val);
+            temp=temp->next;
+        }
+        temp=l2;
+        while(temp!=NULL)
+        {
+            v2.push(temp->val);
+            temp=temp->next;
+        }
+        int carry=0;
+        while(!v1.empty() && !v2.empty())
+        {
+            int summ= v1.front() + v2.front()+carry;
+            carry=summ/10;
+            summ=summ%10;
+            res.push(summ);
+            v1.pop();
+            v2.pop();  
+        }
+        while(!v1.empty())
+        {
+            int summ=v1.front()+carry;
+            carry=summ/10;
+            summ=summ%10;
+            res.push(summ);
+            v1.pop();
+        }
+        while(!v2.empty())
+        {
+            int summ=v2.front()+carry;
+            carry=summ/10;
+            summ=summ%10;
+            res.push(summ);
+            v2.pop();
+        }
+        if(carry==1)
+        {
+            res.push(carry);
+        }
+        temp=result;
+        
+        while(!res.empty())
+        {
+            int numm=res.front();
+            res.pop();
+            temp->next=new ListNode(numm);
+            temp=temp->next;
+            
+        }
+        return result->next;
+        
+        
+        
+    }
