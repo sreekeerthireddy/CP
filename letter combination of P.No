@@ -1,0 +1,71 @@
+class Solution {
+public:
+    
+    void backTrack(vector<string> &v, vector<string> &res, unordered_map<char, vector<string>> umap, string digit, int start, int end)
+    {
+        if(start==end)
+        {
+            string ans="";
+            for(int i=0;i<res.size();i++)
+            {
+              ans=ans+res[i];  
+            }
+            v.push_back(ans);
+            return;
+        }
+        
+        for(int i=0;i<umap[digit[start]].size();i++)
+        {
+            res.push_back(umap[digit[start]][i]);
+            backTrack(v, res,umap, digit, start+1, end);
+            res.pop_back();
+            
+        }
+        
+    }
+    
+    
+    vector<string> letterCombinations(string digits) {
+        
+        unordered_map<char, vector<string>> umap;
+        vector<string> v;
+        
+        vector<string> v1={"a", "b", "c"};
+        umap['2']=v1;
+        vector<string> v2={"d","e","f"};
+        umap['3']=v2;
+        
+        vector<string> v3={"g","h","i"};
+        umap['4']=v3;
+        
+        vector<string> v4={"j","k","l"};
+        umap['5']=v4;
+            
+        vector<string> v5={"m","n","o"};
+        umap['6']=v5;
+        
+        vector<string> v6={"p","q","r", "s"};
+        umap['7']=v6;
+        
+        vector<string> v7={"t","u","v"};
+        umap['8']=v7;
+        
+        vector<string> v8={"w","x","y","z"};
+        umap['9']=v8;
+        
+        if(digits.length()==0)
+        {
+            return v;
+        }
+        
+        if(digits.length()==1)
+        {
+            return umap[digits[0]];
+        }
+        vector<string> res;
+        
+        backTrack(v, res, umap, digits, 0, digits.length());
+        return v;
+        
+    }
+};
