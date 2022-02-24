@@ -1,0 +1,67 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        
+        unordered_map<char, unordered_map<int,int>> umap;
+        unordered_set<string> res;
+        
+        for(int i=0;i<board.size();i++)
+        {
+            unordered_set<char> s;
+            unordered_set<char> rs;
+            
+            for(int j=0;j<board.size();j++)
+            {
+                if(board[i][j]!='.')
+                {                    
+                    if(s.find(board[i][j])==s.end())
+                   {
+                     s.insert(board[i][j]);
+                   }
+                    else
+                   {
+                     return false;
+                   }
+                }
+                
+                if(board[j][i]!='.')
+                {
+                
+                   if(rs.find(board[j][i])==rs.end())
+                  {
+                    rs.insert(board[j][i]);
+                  }
+                   else
+                  {
+                    return false;
+                  }
+                }   
+                
+            }
+        } 
+        
+        for(int i=0;i<board.size();i++)
+        {
+            for(int j=0;j<board.size();j++)
+            {
+                if(board[i][j]!='.')
+                {
+                string s= to_string(board[i][j]-'0')+" in box "+ to_string(i/3)+"-"+to_string(j/3);
+                cout<<s<<"\n";
+                
+                if(res.find(s)==res.end())
+                {
+                    res.insert(s);
+                }
+                else
+                {
+                    return false;
+                }
+                    
+                }
+            }
+        }
+        
+        return true;
+    }
+};
